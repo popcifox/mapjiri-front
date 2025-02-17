@@ -24,7 +24,7 @@
 
     // 위치(구) 목록 로드
     function loadLocationKeywords() {
-      fetch('${API_BASE_URL}/api/v1/locations/gu', {
+      fetch(`${API_BASE_URL}/api/v1/locations/gu`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +52,7 @@
 
     // 동(구에 따른) 목록 로드
     function loadDongKeywords(gu) {
-      fetch('${API_BASE_URL}/api/v1/locations/dong?gu=' + encodeURIComponent(gu), {
+      fetch(`${API_BASE_URL}/api/v1/locations/dong?gu=` + encodeURIComponent(gu), {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@
 
     // 음식 메뉴 타입 로드
     function loadFoodMenuTypes() {
-      fetch('${API_BASE_URL}/api/v1/menu/type', {
+      fetch(`${API_BASE_URL}/api/v1/menu/type`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@
 
     // 음식 메뉴 이름(서브카테고리) 로드
     function loadFoodMenuNames(foodType, targetSelectId) {
-      fetch('${API_BASE_URL}/api/v1/menu/name?menuType=' + encodeURIComponent(foodType), {
+      fetch(`${API_BASE_URL}/api/v1/menu/name?menuType=` + encodeURIComponent(foodType), {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -192,7 +192,7 @@
 
     // 장소 즐겨찾기 목록 로드
     function loadPlaceFavorites() {
-      fetch("${API_BASE_URL}/api/v1/star/place", {
+      fetch(`${API_BASE_URL}/api/v1/star/place`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -211,7 +211,7 @@
 
     // 메뉴 즐겨찾기 목록 로드
     function loadMenuFavorites() {
-      fetch("${API_BASE_URL}/api/v1/star/menu", {
+      fetch(`${API_BASE_URL}/api/v1/star/menu`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -279,7 +279,7 @@
         alert('지역을 선택해주세요.');
         return;
       }
-      fetch("${API_BASE_URL}/api/v1/star/place", {
+      fetch(`${API_BASE_URL}/api/v1/star/place`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -308,7 +308,7 @@
         alert('음식을 선택해주세요.');
         return;
       }
-      fetch("${API_BASE_URL}/api/v1/star/menu", {
+      fetch(`${API_BASE_URL}/api/v1/star/menu`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -334,9 +334,9 @@
     function removeFavorite(keyword, type) {
       let url = "";
       if (type === "place") {
-        url = "${API_BASE_URL}/api/v1/star/place?placeKeyword=" + encodeURIComponent(keyword);
+        url = `${API_BASE_URL}/api/v1/star/place?placeKeyword=` + encodeURIComponent(keyword);
       } else if (type === "menu") {
-        url = "${API_BASE_URL}/api/v1/star/menu?menuKeyword=" + encodeURIComponent(keyword);
+        url = `${API_BASE_URL}/api/v1/star/menu?menuKeyword=` + encodeURIComponent(keyword);
       }
       fetch(url, {
         method: "DELETE",
@@ -366,7 +366,7 @@
 function selectFavorite(keyword, type) {
   if (type === "place") {
     // 장소 즐겨찾기인 경우 기존 로직 유지
-    fetch('${API_BASE_URL}/api/v1/locations/find-gu?dong=' + keyword, {
+    fetch(`${API_BASE_URL}/api/v1/locations/find-gu?dong=` + keyword, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -388,7 +388,7 @@ function selectFavorite(keyword, type) {
     .catch(error => console.error("동 키워드 조회 실패:", error));
   } else if (type === "menu") {
     // 음식 즐겨찾기인 경우, API로 음식 타입을 조회한 후 어느 탭이 활성화되었는지에 따라 검색 필드 업데이트
-    fetch('${API_BASE_URL}/api/v1/menu/find-type?menuName=' + keyword, {
+    fetch(`${API_BASE_URL}/api/v1/menu/find-type?menuName=` + keyword, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -593,7 +593,7 @@ function selectFavorite(keyword, type) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-          var url = '${API_BASE_URL}/api/v1/search/nearby?longitude=' + encodeURIComponent(lng) +
+          var url = `${API_BASE_URL}/api/v1/search/nearby?longitude=` + encodeURIComponent(lng) +
                     '&latitude=' + encodeURIComponent(lat);
 
           fetch(url, {
@@ -734,7 +734,7 @@ function selectFavorite(keyword, type) {
       }
       var lat = window.currentLat;
       var lng = window.currentLng;
-      var url = '${API_BASE_URL}/api/v1/search/nearby?longitude=' + lng +
+      var url = `${API_BASE_URL}/api/v1/search/nearby?longitude=` + lng +
                 '&latitude=' + lat +
                 '&keyword=' + foodKeyword;
 
@@ -824,7 +824,7 @@ function selectFavorite(keyword, type) {
     }
 
     function fetchRankingList() {
-      fetch('${API_BASE_URL}/api/v1/search/rankings', {
+      fetch(`${API_BASE_URL}/api/v1/search/rankings`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -918,7 +918,7 @@ function selectFavorite(keyword, type) {
                   alert('검색 조건을 선택해주세요!');
                   return;
                 }
-                fetch("${API_BASE_URL}/api/v1/star/menu", {
+                fetch(`${API_BASE_URL}/api/v1/star/menu`, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
