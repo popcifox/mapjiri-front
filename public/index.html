@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>음식점 검색</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>음식점 검색 서비스</h1>
+  <nav>
+    <ul class="tabs">
+      <li class="tab active" data-tab="tab-keyword">키워드 검색</li>
+      <li class="tab" data-tab="tab-nearby">주변 전체 음식점</li>
+      <li class="tab" data-tab="tab-filter">위치+음식 검색</li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="search-options">
+    <!-- 탭1: 키워드 검색 (즐겨찾기 아래 배치) -->
+    <div id="tab-keyword" class="tab-content active">
+      <div class="search-form">
+        <form class="search-group" onsubmit="searchPlaces(); return false;">
+          <label for="regionKeyword">구:</label>
+          <select id="regionKeyword">
+            <option value="">선택하세요</option>
+          </select>
+          <label for="dongKeyword">동:</label>
+          <select id="dongKeyword">
+            <option value="">선택하세요</option>
+          </select>
+          <button type="button" id="addRegionFavorite" class="favorite-btn">★</button>
+          <label for="foodCategory">음식 카테고리:</label>
+          <select id="foodCategory" onchange="updateFoodSubcategories()">
+            <option value="">선택하세요</option>
+          </select>
+          <label for="foodSubcategory">음식:</label>
+          <select id="foodSubcategory">
+            <option value="">선택하세요</option>
+          </select>
+          <button type="button" id="addFoodFavorite" class="favorite-btn">★</button>
+          <button type="submit">검색</button>
+        </form>
+      </div>
+      <!-- 즐겨찾기 영역 -->
+      <div class="favorites-wrapper">
+        <section class="favorites-accordion">
+          <div class="accordion-header" onclick="toggleAccordion(this)">즐겨찾기</div>
+          <div class="accordion-content">
+            <div class="favorites-container">
+              <div class="favorites-section">
+                <h3>장소 즐겨찾기</h3>
+                <ul id="favoritesPlaceList" class="favorites-list"></ul>
+              </div>
+              <div class="divider"></div>
+              <div class="favorites-section">
+                <h3>메뉴 즐겨찾기</h3>
+                <ul id="favoritesMenuList" class="favorites-list"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- 탭2: 주변 전체 음식점 (즐겨찾기는 없음) -->
+    <div id="tab-nearby" class="tab-content">
+      <button id="getLocation">내 현재 위치로 주변 음식점 검색</button>
+    </div>
+
+    <!-- 탭3: 위치+음식 검색 -->
+    <div id="tab-filter" class="tab-content">
+      <div class="search-container">
+        <button id="getLocationForFilter">내 현재 위치 가져오기</button>
+        <!-- 검색 영역 내에 즐겨찾기 버튼과 검색하기 버튼의 순서를 서로 교체 -->
+        <div class="search-area">
+          <form onsubmit="searchPlacesWithLocation(); return false;" class="search-group">
+            <label for="foodCategory2">음식 카테고리:</label>
+            <select id="foodCategory2" onchange="updateFoodSubcategoriesForFilter()">
+              <option value="">선택하세요</option>
+            </select>
+            <label for="foodSubcategory2">음식:</label>
+            <select id="foodSubcategory2">
+              <option value="">선택하세요</option>
+            </select>
+            <button type="button" id="addFavoriteForFilter" class="favorite-btn">★</button>
+            <button type="submit">검색</button>
+          </form>
+        </div>
+      </div>
+      <!-- 즐겨찾기 영역 -->
+      <div class="favorites-wrapper">
+        <section class="favorites-accordion">
+          <div class="accordion-header" onclick="toggleAccordion(this)">즐겨찾기</div>
+          <div class="accordion-content">
+            <div class="favorites-container">
+              <div class="favorites-section">
+                <h3>장소 즐겨찾기</h3>
+                <ul id="favoritesPlaceList2" class="favorites-list"></ul>
+              </div>
+              <div class="divider"></div>
+              <div class="favorites-section">
+                <h3>메뉴 즐겨찾기</h3>
+                <ul id="favoritesMenuList2" class="favorites-list"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section id="map-results">
+    <!-- 랭킹 목록 영역 (좌측) -->
+    <div id="ranking">
+      <h2>실시간 키워드 랭킹</h2>
+      <ul id="rankingList"></ul>
+    </div>
+
+    <!-- 지도 영역 -->
+    <div id="map"></div>
+
+    <!-- 검색 결과 리스트 영역 -->
+    <div id="menu_wrap">
+      <ul id="placesList"></ul>
+      <div id="pagination"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Kakao Maps API (실제 API 키로 대체) -->
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d0ef8f150b8fd96315d3f864dec7fa0&libraries=services"></script>
+<script src="script.js"></script>
+</body>
+</html>
