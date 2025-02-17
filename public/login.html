@@ -68,6 +68,8 @@
 </div>
 
 <script>
+  const API_BASE_URL = "http://localhost:8080";
+
   document.getElementById("loginForm").addEventListener("submit", function(event){
     event.preventDefault();
     const formData = new FormData(this);
@@ -76,7 +78,7 @@
       password: formData.get("password")
     };
 
-    fetch("/api/v1/user/signin", {
+    fetch(`${API_BASE_URL}/api/v1/user/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
