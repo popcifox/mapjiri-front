@@ -1,5 +1,5 @@
     /* script.js */
-    const API_BASE_URL = "https://13.124.190.196:8080";
+    const API_BASE_URL = "https://mapjiri.site";
 
     // 전역 변수 및 지도 초기화
     var markers = [];
