@@ -1,5 +1,5 @@
     /* script.js */
-    const API_BASE_URL = "http://localhost:8080";
+    const API_BASE_URL = "http://13.124.190.196:8080";
 
     // 전역 변수 및 지도 초기화
     var markers = [];
