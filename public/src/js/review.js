@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://mapjiri.site";
 const accessToken = localStorage.getItem("accessToken");
 
 // URL에서 name과 address 가져오기

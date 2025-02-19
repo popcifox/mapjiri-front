@@ -68,7 +68,7 @@
 </div>
 
 <script>
-  const API_BASE_URL = "http://localhost:8080";
+  const API_BASE_URL = "https://mapjiri.site";
 
   document.getElementById("loginForm").addEventListener("submit", function(event){
     event.preventDefault();
@@ -92,7 +92,7 @@
               localStorage.setItem("accessToken", result.accessToken);
               localStorage.setItem("refreshToken", result.refreshToken);
               alert("로그인 성공!");
-              window.location.href = "index.html"; // 메인 페이지로 이동
+              window.location.href = "/index"; // 메인 페이지로 이동
             })
             .catch(error => {
               console.error("에러 발생:", error);

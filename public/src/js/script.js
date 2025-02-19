@@ -1,5 +1,5 @@
 /* script.js */
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://mapjiri.site";
 
 // 전역 변수 및 지도 초기화
 var markers = [];
@@ -981,7 +981,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 로그아웃 상태 -> '로그인' 버튼
     loginBtn.textContent = "로그인";
     loginBtn.onclick = function () {
-      window.location.href = "login.html"; // 로그인 페이지로 이동
+      window.location.href = "/login"; // 로그인 페이지로 이동
     };
   }
 });
