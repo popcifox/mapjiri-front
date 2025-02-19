@@ -1,0 +1,103 @@
+/* 전체 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* ✅ 헤더 전체 스타일 */
+header {
+    background-color: #333; /* 메인 페이지와 동일 */
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ✅ 헤더 상단 (음식점 검색 서비스) */
+.header-top {
+    background-color: #333; /* 메인 페이지와 동일 */
+    color: white;
+    padding: 10px 20px;
+    font-size: 32px; /* 메인 페이지와 동일한 크기 */
+}
+
+/* ✅ 헤더 하단 (가게 리뷰 제목) */
+.header-bottom {
+    background-color: #0277f5; /* 기존과 동일 */
+    color: #ffffff;
+    padding: 10px 20px; /* 높이 조정 */
+    font-size: 14px; /* 폰트 크기 줄임 */
+}
+
+
+
+/* ✅ 리뷰 컨테이너 (가로 길이 늘림) */
+#reviewContainer {
+    width: 90%; /* 기존 80% → 90%로 확장 */
+    max-width: 1000px; /* 너무 넓어지지 않도록 최대 너비 설정 */
+    margin: 20px auto;
+}
+
+/* ✅ 개별 리뷰 박스 (가로 길이 확장, 여백 조정) */
+.review-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px; /* 패딩 조정 */
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ 사진 크기 조정 */
+.review-box img {
+    width: 250px; /* 기존 120px → 140px */
+    height: 250px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+/* ✅ 이미지 없는 경우 기본 컨테이너 스타일 (크기 고정) */
+.no-image {
+    width: 250px; /* 기존 이미지 크기와 동일 */
+    height: 250px; /* 높이 고정 */
+    background-color: #e0e0e0; /* 연한 회색 */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #666;
+    font-weight: bold;
+    flex-shrink: 0; /* ✅ 크기 줄어드는 것 방지 */
+    margin-right: 20px;
+}
+
+
+/* ✅ 리뷰 내용 폰트 크기 키우고 행간 늘리기 */
+.review-content {
+    flex-grow: 1;
+    font-size: 18px; /* 기존보다 키움 */
+    line-height: 1.8; /* 기존보다 행간 넓힘 */
+    word-break: break-word; /* 긴 문장 자동 줄바꿈 */
+}
+
+/* ✅ 작성 날짜 & 별점 폰트 키우기 */
+.review-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 16px; /* 기존보다 키움 */
+    color: #666;
+}
+
+/* ✅ 별점 스타일 (가독성 높임) */
+.review-score {
+    font-weight: bold;
+    font-size: 18px; /* 크기 키움 */
+    color: #ff6600;
+}
+

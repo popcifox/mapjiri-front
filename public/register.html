@@ -6,64 +6,64 @@
     <title>회원가입</title>
     <style>
         body {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          background-color: #f7f7f7;
-          margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            margin: 0;
         }
         .register-container {
-          background: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 0 10px rgba(0,0,0,0.1);
-          width: 300px;
-          text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
         }
         .register-container h2 {
-          margin-bottom: 20px;
+            margin-bottom: 20px;
         }
         .register-container input[type="email"],
         .register-container input[type="text"],
         .register-container input[type="password"] {
-          width: 100%;
-          padding: 10px;
-          margin: 8px 0;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
         .register-container button {
-          width: 100%;
-          padding: 10px;
-          margin: 8px 0;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          font-size: 16px;
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
         }
         /* 개별 버튼 스타일 */
         #sendCodeBtn {
-          background-color: #17a2b8;
-          color: #fff;
+            background-color: #17a2b8;
+            color: #fff;
         }
         #sendCodeBtn:hover {
-          background-color: #138496;
+            background-color: #138496;
         }
         #verifyBtn {
-          background-color: #28a745;
-          color: #fff;
+            background-color: #28a745;
+            color: #fff;
         }
         #verifyBtn:hover {
-          background-color: #218838;
+            background-color: #218838;
         }
         button[type="submit"] {
-          background-color: #007BFF;
-          color: #fff;
+            background-color: #007BFF;
+            color: #fff;
         }
         button[type="submit"]:hover {
-          background-color: #0056b3;
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -88,98 +88,96 @@
 </div>
 
 <script>
-    const API_BASE_URL = "https://mapjiri.site";
+    const API_BASE_URL = "http://localhost:8080";
 
     // 회원가입 처리 (/api/v1/user/signup)
     document.getElementById("registerForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const formData = new FormData(this);
-      const data = {
-        email: formData.get("mail"),
-        username: formData.get("username"),
-        password: formData.get("password")
-      };
+        event.preventDefault();
+        const formData = new FormData(this);
+        const data = {
+            email: formData.get("mail"),
+            username: formData.get("username"),
+            password: formData.get("password")
+        };
 
-      fetch(`${API_BASE_URL}/api/v1/user/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("회원가입 실패");
-        }
-        return response.text();
-      })
-      .then(text => {
-        const result = text ? JSON.parse(text) : {};
-        console.log("회원가입 성공:", result);
-        alert("회원가입이 완료되었습니다.");
-        window.location.href = "/login";
-      })
-      .catch(error => {
-        console.error("에러 발생:", error);
-        alert("회원가입에 실패했습니다: " + error.message);
-      });
+        fetch(`${API_BASE_URL}/api/v1/user/signup`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("회원가입 실패");
+                return response.json();
+            })
+            .then(result => {
+                console.log("회원가입 성공:", result);
+                alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+                window.location.href = "login.html"; // ✅ 회원가입 후 로그인 페이지로 이동
+            })
+            .catch(error => {
+                console.error("에러 발생:", error);
+                alert("회원가입에 실패했습니다.");
+            });
     });
+
 
     // 인증번호 전송 버튼 처리 (/api/v1/user/send)
     document.getElementById("sendCodeBtn").addEventListener("click", function() {
-      const email = document.querySelector('input[name="mail"]').value;
-      if (!email) {
-        alert("이메일을 입력하세요.");
-        return;
-      }
-      fetch(`${API_BASE_URL}/api/v1/user/send`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mail: email })
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("인증번호 전송 실패");
+        const email = document.querySelector('input[name="mail"]').value;
+        if (!email) {
+            alert("이메일을 입력하세요.");
+            return;
         }
-        return response.text();
-      })
-      .then(text => {
-        const result = text ? JSON.parse(text) : {};
-        console.log("인증번호 전송 성공:", result);
-        alert("인증번호가 전송되었습니다.");
-      })
-      .catch(error => {
-        console.error("에러 발생:", error);
-        alert("인증번호 전송에 실패했습니다: " + error.message);
-      });
+        fetch(`${API_BASE_URL}/api/v1/user/send`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mail: email })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("인증번호 전송 실패");
+                }
+                return response.text();
+            })
+            .then(text => {
+                const result = text ? JSON.parse(text) : {};
+                console.log("인증번호 전송 성공:", result);
+                alert("인증번호가 전송되었습니다.");
+            })
+            .catch(error => {
+                console.error("에러 발생:", error);
+                alert("인증번호 전송에 실패했습니다: " + error.message);
+            });
     });
 
     // 인증번호 검증 버튼 처리 (/api/v1/user/verify)
     document.getElementById("verifyBtn").addEventListener("click", function() {
-      const email = document.querySelector('input[name="mail"]').value;
-      const code = document.querySelector('input[name="verificationCode"]').value;
-      if (!email || !code) {
-        alert("이메일과 인증번호를 입력하세요.");
-        return;
-      }
-      fetch(`${API_BASE_URL}/api/v1/user/verify`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mail: email, code: code })
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("인증번호 검증 실패");
+        const email = document.querySelector('input[name="mail"]').value;
+        const code = document.querySelector('input[name="verificationCode"]').value;
+        if (!email || !code) {
+            alert("이메일과 인증번호를 입력하세요.");
+            return;
         }
-        return response.text();
-      })
-      .then(text => {
-        const result = text ? JSON.parse(text) : {};
-        console.log("인증번호 검증 성공:", result);
-        alert("인증번호가 검증되었습니다.");
-      })
-      .catch(error => {
-        console.error("에러 발생:", error);
-        alert("인증번호 검증에 실패했습니다: " + error.message);
-      });
+        fetch(`${API_BASE_URL}/api/v1/user/verify`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mail: email, code: code })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("인증번호 검증 실패");
+                }
+                return response.text();
+            })
+            .then(text => {
+                const result = text ? JSON.parse(text) : {};
+                console.log("인증번호 검증 성공:", result);
+                alert("인증번호가 검증되었습니다.");
+            })
+            .catch(error => {
+                console.error("에러 발생:", error);
+                alert("인증번호 검증에 실패했습니다: " + error.message);
+            });
     });
 </script>
 </body>
