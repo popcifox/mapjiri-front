@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인 화면</title>
-  <style>
-    /* 기존 스타일 코드 */
+/* 기존 스타일 코드 */
     body {
       display: flex;
       justify-content: center;
@@ -54,19 +47,3 @@
     .login-container .signup-btn:hover {
       background-color: #1e7e34;
     }
-  </style>
-</head>
-<body>
-<div class="login-container">
-  <h2>로그인</h2>
-  <form id="loginForm">
-    <input type="text" name="email" placeholder="아이디" required>
-    <input type="password" name="password" placeholder="비밀번호" required>
-    <button type="submit">로그인</button>
-  </form>
-  <button type="button" class="signup-btn" onclick="location.href='register.html'">회원가입</button>
-</div>
-
-<script src="src/js/login.js"></script>
-</body>
-</html>
